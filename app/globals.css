@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-1: #ffe9f3;
+  --bg-2: #fff5ec;
+  --bg-3: #f3e8ff;
+  --ink: #4a2b3d;
+  --ink-soft: #8b6b7c;
+  --pink: #ff6b9d;
+  --pink-deep: #e0447a;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+  background-size: 300% 300%;
+  animation: drift 18s ease infinite;
+  overflow-x: hidden;
+}
+
+@keyframes drift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-115dvh) rotate(360deg);
+  }
+}
