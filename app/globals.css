@@ -1,78 +1,276 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import "tailwindcss";
 
 :root {
-  --bg-1: #ffe9f3;
-  --bg-2: #fff5ec;
-  --bg-3: #f3e8ff;
-  --ink: #4a2b3d;
-  --ink-soft: #8b6b7c;
-  --pink: #ff6b9d;
-  --pink-deep: #e0447a;
+  --background: #fff7f9;
+  --foreground: #4a3038;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
 }
 
 body {
-  font-family: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
-  color: var(--ink);
-  background: linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
-  background-size: 300% 300%;
-  animation: drift 18s ease infinite;
-  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@keyframes drift {
+/* -----------------------------
+   Background
+----------------------------- */
+
+.love-background {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 20%,
+      rgba(255, 182, 193, 0.3),
+      transparent 30%),
+    radial-gradient(circle at 80% 30%,
+      rgba(255, 218, 224, 0.45),
+      transparent 30%),
+    radial-gradient(circle at 50% 90%,
+      rgba(255, 228, 232, 0.5),
+      transparent 35%),
+    linear-gradient(135deg,
+      #fff7f9 0%,
+      #fff0f4 50%,
+      #fff8f4 100%);
+}
+
+/* -----------------------------
+   Floating hearts
+----------------------------- */
+
+.floating-heart {
+  position: absolute;
+  opacity: 0.45;
+  animation: floatHeart linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(110vh) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.45;
+  }
+
+  90% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateY(-15vh) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* -----------------------------
+   Page animation
+----------------------------- */
+
+.page-enter {
+  animation: pageEnter 0.65s ease forwards;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* -----------------------------
+   Heart pulse
+----------------------------- */
+
+.heart-pulse {
+  animation: heartPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
 
   0%,
   100% {
-    background-position: 0% 50%;
+    transform: scale(1);
   }
 
   50% {
-    background-position: 100% 50%;
+    transform: scale(1.15);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* -----------------------------
+   Shake
+----------------------------- */
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-8px);
+  }
+
+  40% {
+    transform: translateX(8px);
+  }
+
+  60% {
+    transform: translateX(-6px);
+  }
+
+  80% {
+    transform: translateX(6px);
   }
 }
 
-.hearts {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
+/* -----------------------------
+   Gift box
+----------------------------- */
+
+.gift-box {
+  transition:
+    transform 0.3s ease,
+    opacity 0.4s ease;
 }
 
-.heart {
-  position: absolute;
-  bottom: -60px;
-  animation-name: float-up;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+.gift-box:hover {
+  transform: translateY(-8px) scale(1.03);
 }
 
-@keyframes float-up {
+.gift-open {
+  animation: giftOpen 0.7s ease forwards;
+}
+
+@keyframes giftOpen {
   0% {
-    transform: translateY(0) rotate(0deg);
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12) rotate(-3deg);
   }
 
   100% {
-    transform: translateY(-115dvh) rotate(360deg);
+    transform: scale(0.85);
+    opacity: 0;
   }
+}
+
+/* -----------------------------
+   Door
+----------------------------- */
+
+.door {
+  perspective: 1000px;
+}
+
+.door-inner {
+  transform-origin: left center;
+  transition: transform 0.9s ease;
+}
+
+.door-open .door-inner {
+  transform: rotateY(-105deg);
+}
+
+/* -----------------------------
+   Salmon
+----------------------------- */
+
+.salmon {
+  animation:
+    salmonAppear 0.8s ease,
+    salmonFloat 2s ease-in-out 0.8s infinite;
+}
+
+@keyframes salmonAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.3) translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes salmonFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+/* -----------------------------
+   Room heart
+----------------------------- */
+
+.room-heart {
+  animation: roomHeart 0.7s ease forwards;
+}
+
+@keyframes roomHeart {
+  from {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+
+  60% {
+    transform: scale(1.25);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* -----------------------------
+   Button
+----------------------------- */
+
+.love-button {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.love-button:hover {
+  transform: translateY(-2px);
+}
+
+.love-button:active {
+  transform: scale(0.97);
 }
