@@ -27,7 +27,7 @@ export default function StepFour({
                     <br />
 
                     <span className="font-bold text-[#d27689]">
-                        แซลม่อนนนนน 🐟
+                        {/* แซลม่อนนนนน 🐟 */}
                     </span>
                 </p>
 
@@ -64,11 +64,11 @@ export default function StepFour({
                         </h3>
 
                         <p className="mt-3 text-[#96717b]">
-                            งอนแค่ไหนก็ยอมแล้วนะ
+                            ให้ทั้งตัวเลยนะ กำลังไหว้เธออยู่ด้วยยย 🐟
                         </p>
 
                         <NextButton onClick={onNext}>
-                            ไปต่อกันนะ →
+                            Next →
                         </NextButton>
                     </div>
                 )}

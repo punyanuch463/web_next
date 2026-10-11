@@ -12,7 +12,12 @@ export default function StepFive({
     onNext,
 }: StepFiveProps) {
     const allOpened = openedRooms.length === 4;
-
+    const roomImages = [
+        "/images/rooms/room1.jpg",
+        "/images/rooms/room2.jpg",
+        "/images/rooms/room3.jpg",
+        "/images/rooms/room4.jpg",
+    ];
     return (
         <section className="page-enter text-center">
             <div className="mx-auto max-w-3xl rounded-[2.5rem] border border-white/70 bg-white/70 px-5 py-10 shadow-xl shadow-pink-100 backdrop-blur md:px-12 md:py-14">
@@ -54,15 +59,18 @@ export default function StepFive({
                                     className={`relative h-full w-full rounded-2xl ${isOpen ? "door-open" : ""
                                         }`}
                                 >
-                                    <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-[#fff0f3] shadow-inner">
-                                        <div
-                                            className={`text-6xl ${isOpen
-                                                ? "room-heart"
-                                                : "opacity-0"
-                                                }`}
-                                        >
-                                            ❤️
-                                        </div>
+                                    <div
+                                        className={`absolute inset-2 overflow-hidden rounded-xl
+        transition-all duration-500 ${isOpen
+                                                ? "scale-100 opacity-100"
+                                                : "scale-75 opacity-0"
+                                            }`}
+                                    >
+                                        <img
+                                            src={roomImages[room - 1]}
+                                            alt={`ความทรงจำห้อง ${room}`}
+                                            className="h-full w-full rounded-xl object-cover"
+                                        />
                                     </div>
 
                                     <div className="door-inner absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl border-4 border-[#d998a5] bg-[#e9aab7] shadow-lg">
@@ -97,7 +105,7 @@ export default function StepFive({
                         <p className="mx-auto mt-8 max-w-xl text-base font-medium leading-8 text-[#d27689] md:text-lg">
                             เห็นมั้ย...
                             <br />
-                            เปิดไปห้องไหนก็เจอเธออยู่ดี ❤️
+                            เปิดไปห้องไหนก็เจอเธออยู่ดี เเละเธอก็น่ารักที่สู้ดในโลก ❤️
                         </p>
 
                         <NextButton onClick={onNext}>
